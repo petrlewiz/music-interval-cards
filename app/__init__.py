@@ -3,8 +3,8 @@ from flask import Flask, render_template, redirect, url_for, jsonify, session, r
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, RadioField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Regexp
-from flaskr.users_db import insert_user, user_exists, user_exists_email, user_exists_name, user_exists_info
-from flaskr.card_app import random_number, process_card
+from app.users_db import insert_user, user_exists, user_exists_email, user_exists_name, user_exists_info
+from app.card_app import random_number, process_card
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 
