@@ -7,12 +7,32 @@ from app.users_db import insert_user, user_exists, user_exists_email, user_exist
 from app.card_app import random_number, process_card
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy import create_engine
+from flask_sqlalchemy_lite import SQLAlchemy
+from flask_alembic import Alembic
+from app.models import Model
+
+# Commented out part is for use of users database, if required in the future. The schema is in the models.py file
+# db = SQLAlchemy()
+# alembic = Alembic(metadatas=Model.metadata)
+
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'secret'
 
+    # app.config |= {
+    #     "SQLALCHEMY_ENGINES": {
+    #         "default": "sqlite:///default.sqlite",
+    #     },
+    # }
+    # db.init_app(app)
+
     os.makedirs(app.instance_path, exist_ok=True)
+
+    # with app.app_context():
+    #     Model.metadata.create_all(db.engine)
+
 
     # One-time initializing script to create the users.db database
     @app.cli.command("create_db")    
@@ -83,8 +103,9 @@ def create_app():
         
         greeting_name = session.get("username")
         return render_template('index.html', form=form, greeting_name=greeting_name)
-            
 
+    #The commented out code below is for user authentication, when required.        
+    """
     @app.route('/register', methods=['GET', 'POST'])
     def register():
         '''
@@ -95,8 +116,7 @@ def create_app():
         if form.validate_on_submit():            
             username = form.username.data
             email = form.email.data
-            password = form.password.data
-            confirm_password = form.confirm_password.data
+            password = form.password.data            
 
             hashed_pw = generate_password_hash(password) 
 
@@ -158,6 +178,7 @@ def create_app():
         response.headers['Pragma'] = 'no-cache'
         return response
 
+    """
                
     @app.route('/play', methods=["GET", "POST"])
     def play():
@@ -182,7 +203,9 @@ def create_app():
 
         remaining_rows, card_values, cards_left = process_card(interval_selection, row_numbers) #Process to select a card and card info.
                
-        session["row_numbers"] = remaining_rows        
+        session["row_numbers"] = remaining_rows 
+
+        print(card_values, total_cards, cards_left, interval_selection)              
 
         return jsonify({            
             "card_values": card_values,

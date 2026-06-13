@@ -5,12 +5,16 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
       <!--
       <div class="navbar-nav">        
         <a class="nav-link" href="#">Features</a>
         <a class="nav-link" href="#">Pricing</a>               
       </div>
       -->
+
+      {# -- this tag comments out the jinja for the url for part
+      <!--
       <div class="d-flex ms-auto">
         {% if 'username' in session %}        
           <a id="logout_btn" class="btn btn-outline-secondary me-2" href="{{ url_for('logout') }}">Logout</a>
@@ -18,7 +22,9 @@
           <a id="login_btn" class="btn btn-outline-success me-2" href="{{ url_for('login') }}">Login</a>
         {% endif %}
         <a class="btn btn-success" href="{{ url_for('register') }}">Sign Up</a>
-      </div> 
+      </div>
+      --> 
+      #}
     </div>
   </div>
 </nav>

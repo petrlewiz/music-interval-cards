@@ -1,5 +1,7 @@
 import random
-from app.db import select_card, row_count
+#from app.db import select_card
+from app.card_data import select_card
+from app.card_data import row_count
 
 
 def random_number(interval_selection):
@@ -13,7 +15,7 @@ def random_number(interval_selection):
     
     :param interval_selection: This is essentially the database file name of the interval the user selected to practice.
     '''
-    total_rows = (row_count(interval_selection))
+    total_rows = row_count(interval_selection)
     numbers = list(range(1,(total_rows +1)))    
     random.shuffle(numbers)
     return(numbers, total_rows)
