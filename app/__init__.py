@@ -11,15 +11,17 @@ from sqlalchemy import create_engine
 from flask_sqlalchemy_lite import SQLAlchemy
 from flask_alembic import Alembic
 from app.models import Model
+from dotenv import load_dotenv
 
 # Commented out part is for use of users database, if required in the future. The schema is in the models.py file
 # db = SQLAlchemy()
 # alembic = Alembic(metadatas=Model.metadata)
 
+load_dotenv()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'secret'
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
     # app.config |= {
     #     "SQLALCHEMY_ENGINES": {
