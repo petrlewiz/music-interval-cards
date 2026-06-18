@@ -56,6 +56,7 @@ def create_app():
         conn.close()
         print("Database created successfully!")   
 
+
     class RegisterForm(FlaskForm):
         '''
         Form for users to register.
