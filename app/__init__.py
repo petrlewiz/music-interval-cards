@@ -84,7 +84,10 @@ def create_app():
         Form for users to select the musical interval to practice.
         '''
         choice = RadioField("Choose Interval",
-                            choices=[('p5th', 'Perfect 5th'), ('p4th', 'Perfect 4th')],
+                            choices=[('p5th', 'Perfect 5th'),
+                                      ('p4th', 'Perfect 4th'),
+                                      ('M3rd', 'Major 3rd')
+                                      ],
                             validators=[DataRequired()]
                             )
         submit = SubmitField('Begin')
